@@ -1,0 +1,105 @@
+match_number,stage,date,time,home_team,away_team,score,home_score,away_score,fixture_label,fixture_number,venue,played
+1,Group A,"June 11, 2026 ( 2026-06-11 )",1:00 p.m. UTC−6,Mexico,South Africa,2–0,2,0,,,"Estadio Azteca , Mexico City",yes
+2,Group A,"June 11, 2026 ( 2026-06-11 )",8:00 p.m. UTC−6,South Korea,Czech Republic,2–1,2,1,,,"Estadio Akron , Zapopan",yes
+3,Group A,"June 18, 2026 ( 2026-06-18 )",12:00 p.m. UTC−4,Czech Republic,South Africa,1–1,1,1,,,"Mercedes-Benz Stadium , Atlanta",yes
+4,Group A,"June 18, 2026 ( 2026-06-18 )",7:00 p.m. UTC−6,Mexico,South Korea,1–0,1,0,,,"Estadio Akron , Zapopan",yes
+5,Group A,"June 24, 2026 ( 2026-06-24 )",7:00 p.m. UTC−6,Czech Republic,Mexico,,,,Match 53,53,"Estadio Azteca , Mexico City",no
+6,Group A,"June 24, 2026 ( 2026-06-24 )",7:00 p.m. UTC−6,South Africa,South Korea,,,,Match 54,54,"Estadio BBVA , Guadalupe",no
+7,Group B,"June 12, 2026 ( 2026-06-12 )",3:00 p.m. UTC−4,Canada,Bosnia and Herzegovina,1–1,1,1,,,"BMO Field , Toronto",yes
+8,Group B,"June 13, 2026 ( 2026-06-13 )",12:00 p.m. UTC−7,Qatar,Switzerland,1–1,1,1,,,"Levi's Stadium , Santa Clara",yes
+9,Group B,"June 18, 2026 ( 2026-06-18 )",12:00 p.m. UTC−7,Switzerland,Bosnia and Herzegovina,4–1,4,1,,,"SoFi Stadium , Inglewood",yes
+10,Group B,"June 18, 2026 ( 2026-06-18 )",3:00 p.m. UTC−7,Canada,Qatar,6–0,6,0,,,"BC Place , Vancouver",yes
+11,Group B,"June 24, 2026 ( 2026-06-24 )",12:00 p.m. UTC−7,Switzerland,Canada,,,,Match 51,51,"BC Place , Vancouver",no
+12,Group B,"June 24, 2026 ( 2026-06-24 )",12:00 p.m. UTC−7,Bosnia and Herzegovina,Qatar,,,,Match 52,52,"Lumen Field , Seattle",no
+13,Group C,"June 13, 2026 ( 2026-06-13 )",6:00 p.m. UTC−4,Brazil,Morocco,1–1,1,1,,,"MetLife Stadium , East Rutherford",yes
+14,Group C,"June 13, 2026 ( 2026-06-13 )",9:00 p.m. UTC−4,Haiti,Scotland,0–1,0,1,,,"Gillette Stadium , Foxborough",yes
+15,Group C,"June 19, 2026 ( 2026-06-19 )",6:00 p.m. UTC−4,Scotland,Morocco,0–1,0,1,,,"Gillette Stadium , Foxborough",yes
+16,Group C,"June 19, 2026 ( 2026-06-19 )",8:30 p.m. UTC−4,Brazil,Haiti,3–0,3,0,,,"Lincoln Financial Field , Philadelphia",yes
+17,Group C,"June 24, 2026 ( 2026-06-24 )",6:00 p.m. UTC−4,Scotland,Brazil,,,,Match 49,49,"Hard Rock Stadium , Miami Gardens",no
+18,Group C,"June 24, 2026 ( 2026-06-24 )",6:00 p.m. UTC−4,Morocco,Haiti,,,,Match 50,50,"Mercedes-Benz Stadium , Atlanta",no
+19,Group D,"June 12, 2026 ( 2026-06-12 )",6:00 p.m. UTC−7,United States,Paraguay,4–1,4,1,,,"SoFi Stadium , Inglewood",yes
+20,Group D,"June 13, 2026 ( 2026-06-13 )",9:00 p.m. UTC−7,Australia,Turkey,2–0,2,0,,,"BC Place , Vancouver",yes
+21,Group D,"June 19, 2026 ( 2026-06-19 )",12:00 p.m. UTC−7,United States,Australia,2–0,2,0,,,"Lumen Field , Seattle",yes
+22,Group D,"June 19, 2026 ( 2026-06-19 )",8:00 p.m. UTC−7,Turkey,Paraguay,0–1,0,1,,,"Levi's Stadium , Santa Clara",yes
+23,Group D,"June 25, 2026 ( 2026-06-25 )",7:00 p.m. UTC−7,Turkey,United States,,,,Match 59,59,"SoFi Stadium , Inglewood",no
+24,Group D,"June 25, 2026 ( 2026-06-25 )",7:00 p.m. UTC−7,Paraguay,Australia,,,,Match 60,60,"Levi's Stadium , Santa Clara",no
+25,Group E,"June 14, 2026 ( 2026-06-14 )",12:00 p.m. UTC−5,Germany,Curaçao,7–1,7,1,,,"NRG Stadium , Houston",yes
+26,Group E,"June 14, 2026 ( 2026-06-14 )",7:00 p.m. UTC−4,Ivory Coast,Ecuador,1–0,1,0,,,"Lincoln Financial Field , Philadelphia",yes
+27,Group E,"June 20, 2026 ( 2026-06-20 )",4:00 p.m. UTC−4,Germany,Ivory Coast,2–1,2,1,,,"BMO Field , Toronto",yes
+28,Group E,"June 20, 2026 ( 2026-06-20 )",7:00 p.m. UTC−5,Ecuador,Curaçao,,,,Match 34,34,"Arrowhead Stadium , Kansas City",no
+29,Group E,"June 25, 2026 ( 2026-06-25 )",4:00 p.m. UTC−4,Curaçao,Ivory Coast,,,,Match 55,55,"Lincoln Financial Field , Philadelphia",no
+30,Group E,"June 25, 2026 ( 2026-06-25 )",4:00 p.m. UTC−4,Ecuador,Germany,,,,Match 56,56,"MetLife Stadium , East Rutherford",no
+31,Group F,"June 14, 2026 ( 2026-06-14 )",3:00 p.m. UTC−5,Netherlands,Japan,2–2,2,2,,,"AT&T Stadium , Arlington",yes
+32,Group F,"June 14, 2026 ( 2026-06-14 )",8:00 p.m. UTC−6,Sweden,Tunisia,5–1,5,1,,,"Estadio BBVA , Guadalupe",yes
+33,Group F,"June 20, 2026 ( 2026-06-20 )",12:00 p.m. UTC−5,Netherlands,Sweden,5–1,5,1,,,"NRG Stadium , Houston",yes
+34,Group F,"June 20, 2026 ( 2026-06-20 )",10:00 p.m. UTC−6,Tunisia,Japan,,,,Match 36,36,"Estadio BBVA , Guadalupe",no
+35,Group F,"June 25, 2026 ( 2026-06-25 )",6:00 p.m. UTC−5,Japan,Sweden,,,,Match 57,57,"AT&T Stadium , Arlington",no
+36,Group F,"June 25, 2026 ( 2026-06-25 )",6:00 p.m. UTC−5,Tunisia,Netherlands,,,,Match 58,58,"Arrowhead Stadium , Kansas City",no
+37,Group G,"June 15, 2026 ( 2026-06-15 )",12:00 p.m. UTC−7,Belgium,Egypt,1–1,1,1,,,"Lumen Field , Seattle",yes
+38,Group G,"June 15, 2026 ( 2026-06-15 )",6:00 p.m. UTC−7,Iran,New Zealand,2–2,2,2,,,"SoFi Stadium , Inglewood",yes
+39,Group G,"June 21, 2026 ( 2026-06-21 )",12:00 p.m. UTC−7,Belgium,Iran,,,,Match 39,39,"SoFi Stadium , Inglewood",no
+40,Group G,"June 21, 2026 ( 2026-06-21 )",6:00 p.m. UTC−7,New Zealand,Egypt,,,,Match 40,40,"BC Place , Vancouver",no
+41,Group G,"June 26, 2026 ( 2026-06-26 )",8:00 p.m. UTC−7,Egypt,Iran,,,,Match 63,63,"Lumen Field , Seattle",no
+42,Group G,"June 26, 2026 ( 2026-06-26 )",8:00 p.m. UTC−7,New Zealand,Belgium,,,,Match 64,64,"BC Place , Vancouver",no
+43,Group H,"June 15, 2026 ( 2026-06-15 )",12:00 p.m. UTC−4,Spain,Cape Verde,0–0,0,0,,,"Mercedes-Benz Stadium , Atlanta",yes
+44,Group H,"June 15, 2026 ( 2026-06-15 )",6:00 p.m. UTC−4,Saudi Arabia,Uruguay,1–1,1,1,,,"Hard Rock Stadium , Miami Gardens",yes
+45,Group H,"June 21, 2026 ( 2026-06-21 )",12:00 p.m. UTC−4,Spain,Saudi Arabia,,,,Match 38,38,"Mercedes-Benz Stadium , Atlanta",no
+46,Group H,"June 21, 2026 ( 2026-06-21 )",6:00 p.m. UTC−4,Uruguay,Cape Verde,,,,Match 37,37,"Hard Rock Stadium , Miami Gardens",no
+47,Group H,"June 26, 2026 ( 2026-06-26 )",7:00 p.m. UTC−5,Cape Verde,Saudi Arabia,,,,Match 65,65,"NRG Stadium , Houston",no
+48,Group H,"June 26, 2026 ( 2026-06-26 )",6:00 p.m. UTC−6,Uruguay,Spain,,,,Match 66,66,"Estadio Akron , Zapopan",no
+49,Group I,"June 16, 2026 ( 2026-06-16 )",3:00 p.m. UTC−4,France,Senegal,3–1,3,1,,,"MetLife Stadium , East Rutherford",yes
+50,Group I,"June 16, 2026 ( 2026-06-16 )",6:00 p.m. UTC−4,Iraq,Norway,1–4,1,4,,,"Gillette Stadium , Foxborough",yes
+51,Group I,"June 22, 2026 ( 2026-06-22 )",5:00 p.m. UTC−4,France,Iraq,,,,Match 42,42,"Lincoln Financial Field , Philadelphia",no
+52,Group I,"June 22, 2026 ( 2026-06-22 )",8:00 p.m. UTC−4,Norway,Senegal,,,,Match 41,41,"MetLife Stadium , East Rutherford",no
+53,Group I,"June 26, 2026 ( 2026-06-26 )",3:00 p.m. UTC−4,Norway,France,,,,Match 61,61,"Gillette Stadium , Foxborough",no
+54,Group I,"June 26, 2026 ( 2026-06-26 )",3:00 p.m. UTC−4,Senegal,Iraq,,,,Match 62,62,"BMO Field , Toronto",no
+55,Group J,"June 16, 2026 ( 2026-06-16 )",8:00 p.m. UTC−5,Argentina,Algeria,3–0,3,0,,,"Arrowhead Stadium , Kansas City",yes
+56,Group J,"June 16, 2026 ( 2026-06-16 )",9:00 p.m. UTC−7,Austria,Jordan,3–1,3,1,,,"Levi's Stadium , Santa Clara",yes
+57,Group J,"June 22, 2026 ( 2026-06-22 )",12:00 p.m. UTC−5,Argentina,Austria,,,,Match 43,43,"AT&T Stadium , Arlington",no
+58,Group J,"June 22, 2026 ( 2026-06-22 )",8:00 p.m. UTC−7,Jordan,Algeria,,,,Match 44,44,"Levi's Stadium , Santa Clara",no
+59,Group J,"June 27, 2026 ( 2026-06-27 )",9:00 p.m. UTC−5,Algeria,Austria,,,,Match 69,69,"Arrowhead Stadium , Kansas City",no
+60,Group J,"June 27, 2026 ( 2026-06-27 )",9:00 p.m. UTC−5,Jordan,Argentina,,,,Match 70,70,"AT&T Stadium , Arlington",no
+61,Group K,"June 17, 2026 ( 2026-06-17 )",12:00 p.m. UTC−5,Portugal,DR Congo,1–1,1,1,,,"NRG Stadium , Houston",yes
+62,Group K,"June 17, 2026 ( 2026-06-17 )",8:00 p.m. UTC−6,Uzbekistan,Colombia,1–3,1,3,,,"Estadio Azteca , Mexico City",yes
+63,Group K,"June 23, 2026 ( 2026-06-23 )",12:00 p.m. UTC−5,Portugal,Uzbekistan,,,,Match 47,47,"NRG Stadium , Houston",no
+64,Group K,"June 23, 2026 ( 2026-06-23 )",8:00 p.m. UTC−6,Colombia,DR Congo,,,,Match 48,48,"Estadio Akron , Zapopan",no
+65,Group K,"June 27, 2026 ( 2026-06-27 )",7:30 p.m. UTC−4,Colombia,Portugal,,,,Match 71,71,"Hard Rock Stadium , Miami Gardens",no
+66,Group K,"June 27, 2026 ( 2026-06-27 )",7:30 p.m. UTC−4,DR Congo,Uzbekistan,,,,Match 72,72,"Mercedes-Benz Stadium , Atlanta",no
+67,Group L,"June 17, 2026 ( 2026-06-17 )",3:00 p.m. UTC−5,England,Croatia,4–2,4,2,,,"AT&T Stadium , Arlington",yes
+68,Group L,"June 17, 2026 ( 2026-06-17 )",7:00 p.m. UTC−4,Ghana,Panama,1–0,1,0,,,"BMO Field , Toronto",yes
+69,Group L,"June 23, 2026 ( 2026-06-23 )",4:00 p.m. UTC−4,England,Ghana,,,,Match 45,45,"Gillette Stadium , Foxborough",no
+70,Group L,"June 23, 2026 ( 2026-06-23 )",7:00 p.m. UTC−4,Panama,Croatia,,,,Match 46,46,"BMO Field , Toronto",no
+71,Group L,"June 27, 2026 ( 2026-06-27 )",5:00 p.m. UTC−4,Panama,England,,,,Match 67,67,"MetLife Stadium , East Rutherford",no
+72,Group L,"June 27, 2026 ( 2026-06-27 )",5:00 p.m. UTC−4,Croatia,Ghana,,,,Match 68,68,"Lincoln Financial Field , Philadelphia",no
+73,Round of 32,"June 28, 2026 ( 2026-06-28 )",12:00 p.m. UTC−7,Runner-up Group A,Runner-up Group B,,,,Match 73,73,"SoFi Stadium , Inglewood",no
+74,Round of 32,"June 29, 2026 ( 2026-06-29 )",12:00 p.m. UTC−5,Winner Group C,Runner-up Group F,,,,Match 76,76,"NRG Stadium , Houston",no
+75,Round of 32,"June 29, 2026 ( 2026-06-29 )",4:30 p.m. UTC−4,Germany,3rd Group A/B/C/D/F,,,,Match 74,74,"Gillette Stadium , Foxborough",no
+76,Round of 32,"June 29, 2026 ( 2026-06-29 )",7:00 p.m. UTC−6,Winner Group F,Runner-up Group C,,,,Match 75,75,"Estadio BBVA , Guadalupe",no
+77,Round of 32,"June 30, 2026 ( 2026-06-30 )",12:00 p.m. UTC−5,Runner-up Group E,Runner-up Group I,,,,Match 78,78,"AT&T Stadium , Arlington",no
+78,Round of 32,"June 30, 2026 ( 2026-06-30 )",5:00 p.m. UTC−4,Winner Group I,3rd Group C/D/F/G/H,,,,Match 77,77,"MetLife Stadium , East Rutherford",no
+79,Round of 32,"June 30, 2026 ( 2026-06-30 )",7:00 p.m. UTC−6,Mexico,3rd Group C/E/F/H/I,,,,Match 79,79,"Estadio Azteca , Mexico City",no
+80,Round of 32,"July 1, 2026 ( 2026-07-01 )",12:00 p.m. UTC−4,Winner Group L,3rd Group E/H/I/J/K,,,,Match 80,80,"Mercedes-Benz Stadium , Atlanta",no
+81,Round of 32,"July 1, 2026 ( 2026-07-01 )",1:00 p.m. UTC−7,Winner Group G,3rd Group A/E/H/I/J,,,,Match 82,82,"Lumen Field , Seattle",no
+82,Round of 32,"July 1, 2026 ( 2026-07-01 )",5:00 p.m. UTC−7,United States,3rd Group B/E/F/I/J,,,,Match 81,81,"Levi's Stadium , Santa Clara",no
+83,Round of 32,"July 2, 2026 ( 2026-07-02 )",12:00 p.m. UTC−7,Winner Group H,Runner-up Group J,,,,Match 84,84,"SoFi Stadium , Inglewood",no
+84,Round of 32,"July 2, 2026 ( 2026-07-02 )",7:00 p.m. UTC−4,Runner-up Group K,Runner-up Group L,,,,Match 83,83,"BMO Field , Toronto",no
+85,Round of 32,"July 2, 2026 ( 2026-07-02 )",8:00 p.m. UTC−7,Winner Group B,3rd Group E/F/G/I/J,,,,Match 85,85,"BC Place , Vancouver",no
+86,Round of 32,"July 3, 2026 ( 2026-07-03 )",1:00 p.m. UTC−5,Runner-up Group D,Runner-up Group G,,,,Match 88,88,"AT&T Stadium , Arlington",no
+87,Round of 32,"July 3, 2026 ( 2026-07-03 )",6:00 p.m. UTC−4,Winner Group J,Runner-up Group H,,,,Match 86,86,"Hard Rock Stadium , Miami Gardens",no
+88,Round of 32,"July 3, 2026 ( 2026-07-03 )",8:30 p.m. UTC−5,Winner Group K,3rd Group D/E/I/J/L,,,,Match 87,87,"Arrowhead Stadium , Kansas City",no
+89,Round of 16,"July 4, 2026 ( 2026-07-04 )",12:00 p.m. UTC−5,Winner Match 73,Winner Match 75,,,,Match 90,90,"NRG Stadium , Houston",no
+90,Round of 16,"July 4, 2026 ( 2026-07-04 )",5:00 p.m. UTC−4,Winner Match 74,Winner Match 77,,,,Match 89,89,"Lincoln Financial Field , Philadelphia",no
+91,Round of 16,"July 5, 2026 ( 2026-07-05 )",4:00 p.m. UTC−4,Winner Match 76,Winner Match 78,,,,Match 91,91,"MetLife Stadium , East Rutherford",no
+92,Round of 16,"July 5, 2026 ( 2026-07-05 )",6:00 p.m. UTC−6,Winner Match 79,Winner Match 80,,,,Match 92,92,"Estadio Azteca , Mexico City",no
+93,Round of 16,"July 6, 2026 ( 2026-07-06 )",2:00 p.m. UTC−5,Winner Match 83,Winner Match 84,,,,Match 93,93,"AT&T Stadium , Arlington",no
+94,Round of 16,"July 6, 2026 ( 2026-07-06 )",5:00 p.m. UTC−7,Winner Match 81,Winner Match 82,,,,Match 94,94,"Lumen Field , Seattle",no
+95,Round of 16,"July 7, 2026 ( 2026-07-07 )",12:00 p.m. UTC−4,Winner Match 86,Winner Match 88,,,,Match 95,95,"Mercedes-Benz Stadium , Atlanta",no
+96,Round of 16,"July 7, 2026 ( 2026-07-07 )",1:00 p.m. UTC−7,Winner Match 85,Winner Match 87,,,,Match 96,96,"BC Place , Vancouver",no
+97,Quarterfinals,"July 9, 2026 ( 2026-07-09 )",4:00 p.m. UTC−4,Winner Match 89,Winner Match 90,,,,Match 97,97,"Gillette Stadium , Foxborough",no
+98,Quarterfinals,"July 10, 2026 ( 2026-07-10 )",12:00 p.m. UTC−7,Winner Match 93,Winner Match 94,,,,Match 98,98,"SoFi Stadium , Inglewood",no
+99,Quarterfinals,"July 11, 2026 ( 2026-07-11 )",5:00 p.m. UTC−4,Winner Match 91,Winner Match 92,,,,Match 99,99,"Hard Rock Stadium , Miami Gardens",no
+100,Quarterfinals,"July 11, 2026 ( 2026-07-11 )",8:00 p.m. UTC−5,Winner Match 95,Winner Match 96,,,,Match 100,100,"Arrowhead Stadium , Kansas City",no
+101,Semifinals,"July 14, 2026 ( 2026-07-14 )",2:00 p.m. UTC−5,Winner Match 97,Winner Match 98,,,,Match 101,101,"AT&T Stadium , Arlington",no
+102,Semifinals,"July 15, 2026 ( 2026-07-15 )",3:00 p.m. UTC−4,Winner Match 99,Winner Match 100,,,,Match 102,102,"Mercedes-Benz Stadium , Atlanta",no
+103,Match for third place,"July 18, 2026 ( 2026-07-18 )",5:00 p.m. UTC−4,Loser Match 101,Loser Match 102,,,,Match 103,103,"Hard Rock Stadium , Miami Gardens",no
+104,Final,"July 19, 2026 ( 2026-07-19 )",3:00 p.m. UTC−4,Winner Match 101,Winner Match 102,,,,Match 104,104,"MetLife Stadium , East Rutherford",no
