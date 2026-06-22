@@ -3,7 +3,6 @@ import './App.css'
 
 const REFRESH_INTERVAL_MS = 30000
 const FAVORITES_STORAGE_KEY = 'wcscores-favorites'
-const PREMIUM_STORAGE_KEY = 'wcscores-premium-enabled'
 const LANGUAGE_STORAGE_KEY = 'wcscores-language'
 const DISPLAY_TIME_ZONE = 'America/Detroit'
 const DISPLAY_TIME_ZONE_LABEL = 'Eastern Daylight Time (Detroit, MI GMT-4)'
@@ -1221,17 +1220,6 @@ function buildLineupRows(players, isPremium) {
     return '<p class="empty">Lineups are not available yet for this match.</p>'
   }
 
-  if (!isPremium) {
-    return `<ul>${players
-      .map(
-        (player) =>
-          `<li><strong>#${escapeHtml(player.number)} ${escapeHtml(
-            player.name
-          )}</strong><small>Upgrade to Premium to see player score and full stats.</small></li>`
-      )
-      .join('')}</ul>`
-  }
-
   return `<ul>${players
     .map(
       (player) =>
@@ -1256,23 +1244,19 @@ function buildLineupWindowHtml(match, details, errorMessage, isPremium) {
     )
     .join('')
   const errorMarkup = errorMessage ? `<p class="error">${escapeHtml(errorMessage)}</p>` : ''
-  const premiumTag = isPremium
-    ? '<span class="premium">Premium analytics enabled</span>'
-    : '<span class="premium">Free plan - limited lineup stats</span>'
+  const premiumTag = '<span class="premium">Full lineup analytics enabled</span>'
   const loadedMarkup = details
     ? `<div class="grid"><section><h2>${escapeHtml(match.homeTeam)}</h2><p class="coach">Coach: ${escapeHtml(
         details.homeCoach
       )}</p><p class="coach">Goal moments: ${escapeHtml(
         (details.homeGoals || []).map((goal) => `${goal.scorer} ${goal.minute}`).join(', ') || 'No goals yet'
-      )}</p><p class="coach">Team lineup score: ${
-        isPremium ? (homeLineupScore ?? 'N/A') : 'Premium only'
-      }</p>${homeRows}</section><section><h2>${escapeHtml(match.awayTeam)}</h2><p class="coach">Coach: ${escapeHtml(
+      )}</p><p class="coach">Team lineup score: ${homeLineupScore ?? 'N/A'}</p>${homeRows}</section><section><h2>${escapeHtml(
+        match.awayTeam
+      )}</h2><p class="coach">Coach: ${escapeHtml(
         details.awayCoach
       )}</p><p class="coach">Goal moments: ${escapeHtml(
         (details.awayGoals || []).map((goal) => `${goal.scorer} ${goal.minute}`).join(', ') || 'No goals yet'
-      )}</p><p class="coach">Team lineup score: ${
-        isPremium ? (awayLineupScore ?? 'N/A') : 'Premium only'
-      }</p>${awayRows}</section></div>`
+      )}</p><p class="coach">Team lineup score: ${awayLineupScore ?? 'N/A'}</p>${awayRows}</section></div>`
     : ''
 
   return `<!doctype html>
@@ -1331,7 +1315,7 @@ function App() {
   const [selectedMatchDetails, setSelectedMatchDetails] = useState(null)
   const [isLoadingMatchDetails, setIsLoadingMatchDetails] = useState(false)
   const [matchDetailError, setMatchDetailError] = useState('')
-  const [isPremium, setIsPremium] = useState(false)
+  const isPremium = true
   const [language, setLanguage] = useState('en')
   const deferredSearchTerm = useDeferredValue(searchTerm)
 
@@ -1346,12 +1330,6 @@ function App() {
     { id: 'confidence', label: getTranslation(language, 'topConfidence') },
     { id: 'soonest', label: getTranslation(language, 'kickoffTime') },
   ]
-  const PREMIUM_FEATURES = [
-    getTranslation(language, 'playerScores'),
-    getTranslation(language, 'topPlayers'),
-    getTranslation(language, 'lineupScore'),
-  ]
-
   const activeTab = useMemo(
     () => SPORT_TABS.find((tab) => tab.id === selectedTab) || SPORT_TABS[0],
     [selectedTab]
@@ -1369,16 +1347,6 @@ function App() {
     }
 
     try {
-      const storedPremium = window.localStorage.getItem(PREMIUM_STORAGE_KEY)
-
-      if (storedPremium) {
-        setIsPremium(JSON.parse(storedPremium))
-      }
-    } catch {
-      setIsPremium(false)
-    }
-
-    try {
       const storedLanguage = window.localStorage.getItem(LANGUAGE_STORAGE_KEY)
 
       if (storedLanguage) {
@@ -1392,10 +1360,6 @@ function App() {
   useEffect(() => {
     window.localStorage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify(favoriteMatchIds))
   }, [favoriteMatchIds])
-
-  useEffect(() => {
-    window.localStorage.setItem(PREMIUM_STORAGE_KEY, JSON.stringify(isPremium))
-  }, [isPremium])
 
   useEffect(() => {
     window.localStorage.setItem(LANGUAGE_STORAGE_KEY, language)
@@ -1603,17 +1567,15 @@ function App() {
     setIsLoadingMatchDetails(false)
   }
 
-  function handlePremiumUpgrade() {
-    setIsPremium(true)
-  }
-
   return (
     <main className="app-shell">
       <header className="hero">
+        <p className="update-banner">
+          NEW UPDATE THURSDAY JUNE 25: Premium and more sports are coming, including Basketball and Hockey.
+        </p>
         <div className="hero-top-actions">
-          <span className="premium-price-tag">{getTranslation(language, 'premiumPrice')}</span>
-          <select 
-            value={language} 
+          <select
+            value={language}
             onChange={(e) => setLanguage(e.target.value)}
             className="language-selector"
             aria-label={getTranslation(language, 'language')}
@@ -1624,9 +1586,6 @@ function App() {
               </option>
             ))}
           </select>
-          <button type="button" className="premium-top-button" onClick={handlePremiumUpgrade}>
-            {isPremium ? getTranslation(language, 'premiumActive') : getTranslation(language, 'unlockPremium')}
-          </button>
         </div>
         <p className="kicker">ScoreSprint</p>
         <h1>{getTranslation(language, 'allSports')}</h1>
@@ -1710,29 +1669,6 @@ function App() {
           <strong>{watchlistMatches.length}</strong>
           <span>Watchlist</span>
         </article>
-      </section>
-
-      <section className="premium-panel" aria-label="Premium plan">
-        <div className="premium-head">
-          <h2>Premium Plan - $4.99/month</h2>
-          <button
-            type="button"
-            className={isPremium ? 'premium-toggle active' : 'premium-toggle'}
-            onClick={() => setIsPremium((current) => !current)}
-          >
-            {isPremium ? 'Premium Enabled' : 'Upgrade to Premium $4.99'}
-          </button>
-        </div>
-        <p className="premium-copy">
-          Unlock player scores, lineup strength, and top player rankings.
-        </p>
-        <div className="premium-grid">
-          {PREMIUM_FEATURES.map((feature) => (
-            <article key={feature} className="premium-item">
-              {feature}
-            </article>
-          ))}
-        </div>
       </section>
 
       {featuredMatch ? (
@@ -1879,17 +1815,13 @@ function App() {
               >
                 Prediction: {match.prediction.text}
               </button>
-              {isPremium ? (
-                <div className="insight-chips" onClick={(event) => event.stopPropagation()}>
-                  {getPremiumInsights(match).map((insight) => (
-                    <span key={`${match.id}-${insight}`} className="insight-chip">
-                      {insight}
-                    </span>
-                  ))}
-                </div>
-              ) : (
-                <p className="premium-lock">Premium unlocks advanced match insights.</p>
-              )}
+              <div className="insight-chips" onClick={(event) => event.stopPropagation()}>
+                {getPremiumInsights(match).map((insight) => (
+                  <span key={`${match.id}-${insight}`} className="insight-chip">
+                    {insight}
+                  </span>
+                ))}
+              </div>
               {match.prediction.confidence ? (
                 <p className="confidence">Confidence: {match.prediction.confidence}%</p>
               ) : null}
@@ -2015,9 +1947,7 @@ function App() {
                   </p>
                   <p className="confidence">
                     Team lineup score:{' '}
-                    {isPremium
-                      ? getTeamLineupScore(selectedMatchDetails.homePlayers) ?? 'N/A'
-                      : 'Premium only'}
+                    {getTeamLineupScore(selectedMatchDetails.homePlayers) ?? 'N/A'}
                   </p>
                   <ul>
                     {selectedMatchDetails.homePlayers.map((player) => (
@@ -2025,9 +1955,9 @@ function App() {
                         <span>
                           #{player.number} {player.name}
                         </span>
-                        <span>{isPremium ? `${player.rating}/10` : 'Premium only'}</span>
+                        <span>{`${player.rating}/10`}</span>
                         <small>
-                          {isPremium ? `G:${player.goals} C:${player.cards}` : 'Upgrade to see player stats'}
+                          {`G:${player.goals} C:${player.cards}`}
                         </small>
                       </li>
                     ))}
@@ -2045,9 +1975,7 @@ function App() {
                   </p>
                   <p className="confidence">
                     Team lineup score:{' '}
-                    {isPremium
-                      ? getTeamLineupScore(selectedMatchDetails.awayPlayers) ?? 'N/A'
-                      : 'Premium only'}
+                    {getTeamLineupScore(selectedMatchDetails.awayPlayers) ?? 'N/A'}
                   </p>
                   <ul>
                     {selectedMatchDetails.awayPlayers.map((player) => (
@@ -2055,9 +1983,9 @@ function App() {
                         <span>
                           #{player.number} {player.name}
                         </span>
-                        <span>{isPremium ? `${player.rating}/10` : 'Premium only'}</span>
+                        <span>{`${player.rating}/10`}</span>
                         <small>
-                          {isPremium ? `G:${player.goals} C:${player.cards}` : 'Upgrade to see player stats'}
+                          {`G:${player.goals} C:${player.cards}`}
                         </small>
                       </li>
                     ))}
@@ -2067,20 +1995,16 @@ function App() {
 
                 <section className="premium-scoreboard">
                   <h3>Top Players Scoreboard</h3>
-                  {isPremium ? (
-                    <div className="premium-score-list">
-                      {[...selectedMatchDetails.homePlayers, ...selectedMatchDetails.awayPlayers]
-                        .sort((left, right) => right.rating - left.rating)
-                        .slice(0, 6)
-                        .map((player) => (
-                          <p key={`top-${player.id}-${player.number}`}>
-                            #{player.number} {player.name} - {player.rating}/10
-                          </p>
-                        ))}
-                    </div>
-                  ) : (
-                    <p className="premium-lock">Upgrade to Premium to view top player scores.</p>
-                  )}
+                  <div className="premium-score-list">
+                    {[...selectedMatchDetails.homePlayers, ...selectedMatchDetails.awayPlayers]
+                      .sort((left, right) => right.rating - left.rating)
+                      .slice(0, 6)
+                      .map((player) => (
+                        <p key={`top-${player.id}-${player.number}`}>
+                          #{player.number} {player.name} - {player.rating}/10
+                        </p>
+                      ))}
+                  </div>
                 </section>
               </>
             ) : null}
