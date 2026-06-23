@@ -1317,9 +1317,6 @@ function App() {
   const [matchDetailError, setMatchDetailError] = useState('')
   const isPremium = true
   const [language, setLanguage] = useState('en')
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false)
-  const [expandedSections, setExpandedSections] = useState({ worldCup: true, playerStats: false })
-  const [viewTab, setViewTab] = useState('live')
   const deferredSearchTerm = useDeferredValue(searchTerm)
 
   const VIEW_FILTERS = [
@@ -1497,13 +1494,6 @@ function App() {
     )
   }
 
-  function toggleSection(sectionName) {
-    setExpandedSections((prev) => ({
-      ...prev,
-      [sectionName]: !prev[sectionName],
-    }))
-  }
-
   async function openMatchDetails(match) {
     setSelectedMatch(match)
     setSelectedMatchDetails(null)
@@ -1578,22 +1568,12 @@ function App() {
   }
 
   return (
-    <main className="app-shell-organized">
-      {/* Navigation Header */}
-      <nav className="navbar">
-        <div className="navbar-container">
-          <button
-            type="button"
-            className="sidebar-toggle"
-            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            aria-label="Toggle sidebar"
-          >
-            ☰
-          </button>
-          <div className="navbar-brand">
-            <p className="navbar-kicker">ScoreSprint</p>
-            <h1 className="navbar-title">FIFA World Cup 2026</h1>
-          </div>
+    <main className="app-shell">
+      <header className="hero">
+        <p className="update-banner">
+          NEW UPDATE THURSDAY JUNE 25: Premium and more sports are coming, including Basketball and Hockey.
+        </p>
+        <div className="hero-top-actions">
           <select
             value={language}
             onChange={(e) => setLanguage(e.target.value)}
@@ -1607,427 +1587,304 @@ function App() {
             ))}
           </select>
         </div>
-      </nav>
-
-      {/* Sidebar */}
-      <aside className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
-        <div className="sidebar-inner">
-          <button
-            type="button"
-            className="sidebar-close"
-            onClick={() => setIsSidebarOpen(false)}
-            aria-label="Close sidebar"
-          >
-            ✕
-          </button>
-
-          <section className="sidebar-section">
-            <h3>Quick Filters</h3>
-            <div className="filter-chips">
-              {VIEW_FILTERS.map((filter) => (
-                <button
-                  key={filter.id}
-                  type="button"
-                  onClick={() => {
-                    setViewFilter(filter.id)
-                    setIsSidebarOpen(false)
-                  }}
-                  className={viewFilter === filter.id ? 'chip active' : 'chip'}
-                >
-                  {filter.label}
-                </button>
-              ))}
-            </div>
-          </section>
-
-          <section className="sidebar-section">
-            <h3>Sort By</h3>
-            <div className="filter-chips">
-              {SORT_OPTIONS.map((option) => (
-                <button
-                  key={option.id}
-                  type="button"
-                  onClick={() => {
-                    setSortMode(option.id)
-                    setIsSidebarOpen(false)
-                  }}
-                  className={sortMode === option.id ? 'chip active' : 'chip'}
-                >
-                  {option.label}
-                </button>
-              ))}
-            </div>
-          </section>
-
-          <section className="sidebar-section">
-            <h3>Stats</h3>
-            <div className="sidebar-stats">
-              <article className="stat-item">
-                <strong>{liveNowCount}</strong>
-                <span>Live</span>
-              </article>
-              <article className="stat-item">
-                <strong>{scheduledCount}</strong>
-                <span>Upcoming</span>
-              </article>
-              <article className="stat-item">
-                <strong>{finalCount}</strong>
-                <span>Finished</span>
-              </article>
-              <article className="stat-item">
-                <strong>{watchlistMatches.length}</strong>
-                <span>Saved</span>
-              </article>
-            </div>
-          </section>
-        </div>
-      </aside>
-
-      {/* Overlay for sidebar */}
-      {isSidebarOpen && (
-        <div
-          className="sidebar-overlay"
-          onClick={() => setIsSidebarOpen(false)}
-          role="presentation"
-        />
-      )}
-
-      {/* Main Content */}
-      <div className="main-content">
-        {/* Update Banner */}
-        <p className="update-banner">
-          NEW UPDATE THURSDAY JUNE 25: Premium and more sports are coming, including Basketball and Hockey.
+        <p className="kicker">ScoreSprint</p>
+        <h1>{getTranslation(language, 'allSports')}</h1>
+        <p className="subtitle">
+          {getTranslation(language, 'subtitle')}
         </p>
+        <p className="refresh">
+          {getTranslation(language, 'lastUpdated')}: {lastUpdated || 'Loading...'} · {DISPLAY_TIME_ZONE_LABEL}
+        </p>
+      </header>
 
-        {/* Search Box */}
-        <section className="search-section">
-          <label className="search-box">
-            <span>{getTranslation(language, 'searchLabel')}</span>
-            <input
-              type="text"
-              value={searchTerm}
-              onChange={(event) => setSearchTerm(event.target.value)}
-              placeholder={getTranslation(language, 'searchPlaceholder')}
-            />
-          </label>
-        </section>
+      <section className="toolbar" aria-label="Scoreboard controls">
+        <div className="filter-row">
+          {VIEW_FILTERS.map((filter) => (
+            <button
+              key={filter.id}
+              type="button"
+              onClick={() => setViewFilter(filter.id)}
+              className={viewFilter === filter.id ? 'filter-pill active' : 'filter-pill'}
+            >
+              {filter.label}
+            </button>
+          ))}
 
-        {/* View Tabs */}
-        <div className="view-tabs">
-          <button
-            className={`view-tab ${viewTab === 'live' ? 'active' : ''}`}
-            onClick={() => setViewTab('live')}
-          >
-            Live Now
-          </button>
-          <button
-            className={`view-tab ${viewTab === 'calendar' ? 'active' : ''}`}
-            onClick={() => setViewTab('calendar')}
-          >
-            Calendar
-          </button>
-          <button
-            className={`view-tab ${viewTab === 'stats' ? 'active' : ''}`}
-            onClick={() => setViewTab('stats')}
-          >
-            Statistics
-          </button>
+          <div className="sort-group" role="group" aria-label="Sort matches">
+            {SORT_OPTIONS.map((option) => (
+              <button
+                key={option.id}
+                type="button"
+                onClick={() => setSortMode(option.id)}
+                className={sortMode === option.id ? 'filter-pill active' : 'filter-pill'}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
         </div>
 
-        {/* Live Tab */}
-        {viewTab === 'live' && (
-          <section className="tab-content">
-            {featuredMatch ? (
-              <section className="spotlight" aria-label="Featured match">
-                <div className="spotlight-copy">
-                  <p className="spotlight-kicker">Featured Match</p>
-                  <h2>
-                    {featuredMatch.homeTeam} vs {featuredMatch.awayTeam}
-                  </h2>
-                  <p className="spotlight-meta">
-                    {featuredMatch.status} • {formatDateTime(featuredMatch.date)} • {featuredMatch.venue}
-                  </p>
-                </div>
+        <label className="search-box">
+          <span>{getTranslation(language, 'searchLabel')}</span>
+          <input
+            type="text"
+            value={searchTerm}
+            onChange={(event) => setSearchTerm(event.target.value)}
+            placeholder={getTranslation(language, 'searchPlaceholder')}
+          />
+        </label>
+      </section>
 
-                <div className="spotlight-score">
-                  <div>
-                    <span>{featuredMatch.homeTeam}</span>
-                    <strong>{featuredMatch.homeScore}</strong>
-                  </div>
-                  <div>
-                    <span>{featuredMatch.awayTeam}</span>
-                    <strong>{featuredMatch.awayScore}</strong>
-                  </div>
-                </div>
+      <section className="summary-strip" aria-label="Scoreboard summary">
+        <article className="summary-card">
+          <strong>{liveNowCount}</strong>
+          <span>Live now</span>
+        </article>
+        <article className="summary-card">
+          <strong>{scheduledCount}</strong>
+          <span>Upcoming</span>
+        </article>
+        <article className="summary-card">
+          <strong>{finalCount}</strong>
+          <span>Finished</span>
+        </article>
+        <article className="summary-card">
+          <strong>{filteredMatches.length}</strong>
+          <span>On screen</span>
+        </article>
+        <article className="summary-card">
+          <strong>{watchlistMatches.length}</strong>
+          <span>Watchlist</span>
+        </article>
+      </section>
 
-                <div className="spotlight-prediction">
-                  <button
-                    type="button"
-                    className="prediction prediction-button"
-                    onClick={() => openLineupsInNewWindow(featuredMatch)}
-                  >
-                    Prediction: {featuredMatch.prediction.text}
-                  </button>
-                  {featuredMatch.prediction.confidence ? (
-                    <span>{featuredMatch.prediction.confidence}% confidence</span>
-                  ) : (
-                    <span>Prediction locked</span>
-                  )}
-                  <button
-                    type="button"
-                    className="watch-button"
-                    onClick={() => toggleFavorite(featuredMatch.id)}
-                  >
-                    {favoriteMatchIds.includes(featuredMatch.id) ? 'Remove from watchlist' : 'Add to watchlist'}
-                  </button>
-                </div>
-              </section>
-            ) : null}
+      {featuredMatch ? (
+        <section className="spotlight" aria-label="Featured match">
+          <div className="spotlight-copy">
+            <p className="spotlight-kicker">Featured Match</p>
+            <h2>
+              {featuredMatch.homeTeam} vs {featuredMatch.awayTeam}
+            </h2>
+            <p className="spotlight-meta">
+              {featuredMatch.status} • {formatDateTime(featuredMatch.date)} • {featuredMatch.venue}
+            </p>
+          </div>
 
-            <section className="live-panel">
-              <div className="section-head">
-                <h2>Live Scores</h2>
-                <span>
-                  {liveNowCount} live • {predictedLiveMatches.length} matches
-                </span>
+          <div className="spotlight-score">
+            <div>
+              <span>{featuredMatch.homeTeam}</span>
+              <strong>{featuredMatch.homeScore}</strong>
+            </div>
+            <div>
+              <span>{featuredMatch.awayTeam}</span>
+              <strong>{featuredMatch.awayScore}</strong>
+            </div>
+          </div>
+
+          <div className="spotlight-prediction">
+            <button
+              type="button"
+              className="prediction prediction-button"
+              onClick={() => openLineupsInNewWindow(featuredMatch)}
+            >
+              Prediction: {featuredMatch.prediction.text}
+            </button>
+            {featuredMatch.prediction.confidence ? (
+              <span>{featuredMatch.prediction.confidence}% confidence</span>
+            ) : (
+              <span>Prediction locked</span>
+            )}
+            <button
+              type="button"
+              className="watch-button"
+              onClick={() => toggleFavorite(featuredMatch.id)}
+            >
+              {favoriteMatchIds.includes(featuredMatch.id) ? 'Remove from watchlist' : 'Add to watchlist'}
+            </button>
+          </div>
+        </section>
+      ) : null}
+
+      <section className="watchlist-panel" aria-label="Watchlist matches">
+        <div className="section-head">
+          <h2>Watchlist</h2>
+          <span>{watchlistMatches.length} saved matches</span>
+        </div>
+
+        {watchlistMatches.length === 0 ? (
+          <p className="state-message">Star matches to keep them pinned here.</p>
+        ) : (
+          <div className="watchlist-grid">
+            {watchlistMatches.map((match) => (
+              <article key={match.id} className="watchlist-card">
+                <div className="meta">
+                  <span className="league">{match.league}</span>
+                  <span className="status">{match.status}</span>
+                </div>
+                <p className="watchlist-title">
+                  {match.homeTeam} vs {match.awayTeam}
+                </p>
+                <p className="confidence">
+                  {match.prediction.confidence
+                    ? `${match.prediction.confidence}% confidence`
+                    : 'Prediction locked'}
+                </p>
+              </article>
+            ))}
+          </div>
+        )}
+      </section>
+
+      <section className="live-panel">
+        <div className="section-head">
+          <h2>Live Scores</h2>
+          <span>
+            {liveNowCount} live • {predictedLiveMatches.length} matches
+          </span>
+        </div>
+
+        {isLoadingLive ? <p className="state-message">Loading live scores...</p> : null}
+        {liveError ? <p className="state-message error">{liveError}</p> : null}
+
+        <div className="score-grid">
+          {visibleMatches.map((match) => (
+            <article
+              key={match.id}
+              className="match-card"
+              role="button"
+              tabIndex={0}
+              aria-label={`${match.homeTeam} vs ${match.awayTeam} lineup details`}
+              onClick={() => openMatchDetails(match)}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                  event.preventDefault()
+                  openMatchDetails(match)
+                }
+              }}
+            >
+              <div className="meta">
+                <span className="league">{match.league}</span>
+                <span className="status">{match.status}</span>
               </div>
-
-              {isLoadingLive ? <p className="state-message">Loading live scores...</p> : null}
-              {liveError ? <p className="state-message error">{liveError}</p> : null}
-
-              <div className="score-grid">
-                {visibleMatches.map((match) => (
-                  <article
-                    key={match.id}
-                    className="match-card"
-                    role="button"
-                    tabIndex={0}
-                    aria-label={`${match.homeTeam} vs ${match.awayTeam} lineup details`}
-                    onClick={() => openMatchDetails(match)}
-                    onKeyDown={(event) => {
-                      if (event.key === 'Enter' || event.key === ' ') {
-                        event.preventDefault()
-                        openMatchDetails(match)
-                      }
-                    }}
-                  >
-                    <div className="meta">
-                      <span className="league">{match.league}</span>
-                      <span className="status">{match.status}</span>
-                    </div>
-                    <div className="teams">
-                      <p>
-                        <strong>{match.homeTeam}</strong>
-                        <span>{match.homeScore}</span>
-                      </p>
-                      <p>
-                        <strong>{match.awayTeam}</strong>
-                        <span>{match.awayScore}</span>
-                      </p>
-                    </div>
-                    <div className="details">
-                      <span>{formatDateTime(match.date)}</span>
-                      <span>{match.venue}</span>
-                    </div>
-                    <button
-                      type="button"
-                      className={favoriteMatchIds.includes(match.id) ? 'star-button active' : 'star-button'}
-                      onClick={(event) => {
-                        event.stopPropagation()
-                        toggleFavorite(match.id)
-                      }}
-                    >
-                      {favoriteMatchIds.includes(match.id) ? 'Starred match' : 'Star match'}
-                    </button>
-                    <button
-                      type="button"
-                      className="prediction prediction-button"
-                      onClick={(event) => {
-                        event.stopPropagation()
-                        openLineupsInNewWindow(match)
-                      }}
-                    >
-                      Prediction: {match.prediction.text}
-                    </button>
-                    <div className="insight-chips" onClick={(event) => event.stopPropagation()}>
-                      {getPremiumInsights(match).map((insight) => (
-                        <span key={`${match.id}-${insight}`} className="insight-chip">
-                          {insight}
-                        </span>
-                      ))}
-                    </div>
-                    {match.prediction.confidence ? (
-                      <p className="confidence">Confidence: {match.prediction.confidence}%</p>
-                    ) : null}
-                    <button
-                      type="button"
-                      className="details-button"
-                      onClick={(event) => {
-                        event.stopPropagation()
-                        openMatchDetails(match)
-                      }}
-                    >
-                      View player stats and rating /10
-                    </button>
-                    <div className="watch-links">
-                      {(match.momentsLinks || []).map((link) => (
-                        <a
-                          key={`${match.id}-${link.url}`}
-                          href={link.url}
-                          target="_blank"
-                          rel="noreferrer"
-                          onClick={(event) => event.stopPropagation()}
-                        >
-                          {link.label}
-                        </a>
-                      ))}
-                      {(match.watchLinks || []).map((link) => (
-                        <a
-                          key={link.url}
-                          href={link.url}
-                          target="_blank"
-                          rel="noreferrer"
-                          onClick={(event) => event.stopPropagation()}
-                        >
-                          {link.label}
-                        </a>
-                      ))}
-                    </div>
-                  </article>
+              <div className="teams">
+                <p>
+                  <strong>{match.homeTeam}</strong>
+                  <span>{match.homeScore}</span>
+                </p>
+                <p>
+                  <strong>{match.awayTeam}</strong>
+                  <span>{match.awayScore}</span>
+                </p>
+              </div>
+              <div className="details">
+                <span>{formatDateTime(match.date)}</span>
+                <span>{match.venue}</span>
+              </div>
+              <button
+                type="button"
+                className={favoriteMatchIds.includes(match.id) ? 'star-button active' : 'star-button'}
+                onClick={(event) => {
+                  event.stopPropagation()
+                  toggleFavorite(match.id)
+                }}
+              >
+                {favoriteMatchIds.includes(match.id) ? 'Starred match' : 'Star match'}
+              </button>
+              <button
+                type="button"
+                className="prediction prediction-button"
+                onClick={(event) => {
+                  event.stopPropagation()
+                  openLineupsInNewWindow(match)
+                }}
+              >
+                Prediction: {match.prediction.text}
+              </button>
+              <div className="insight-chips" onClick={(event) => event.stopPropagation()}>
+                {getPremiumInsights(match).map((insight) => (
+                  <span key={`${match.id}-${insight}`} className="insight-chip">
+                    {insight}
+                  </span>
                 ))}
-
-                {!isLoadingLive && visibleMatches.length === 0 ? (
-                  <p className="state-message">No games found in this feed right now.</p>
-                ) : null}
               </div>
-            </section>
-          </section>
-        )}
-
-        {/* Calendar Tab */}
-        {viewTab === 'calendar' && (
-          <section className="tab-content">
-            <section className="world-cup-panel">
+              {match.prediction.confidence ? (
+                <p className="confidence">Confidence: {match.prediction.confidence}%</p>
+              ) : null}
               <button
                 type="button"
-                className="collapsible-header"
-                onClick={() => toggleSection('worldCup')}
+                className="details-button"
+                onClick={(event) => {
+                  event.stopPropagation()
+                  openMatchDetails(match)
+                }}
               >
-                <span className="collapsible-title">FIFA World Cup 2026 Schedule</span>
-                <span className="collapsible-icon">{expandedSections.worldCup ? '▼' : '▶'}</span>
+                View player stats and rating /10
               </button>
-
-              {expandedSections.worldCup && (
-                <div className="collapsible-content">
-                  <div className="section-head">
-                    <h2>Matches</h2>
-                    <span>
-                      {playedCount}/{worldCupMatches.length} played
-                    </span>
-                  </div>
-
-                  <div className="wc-list">
-                    {predictedWorldCupMatches.map((match) => (
-                      <article key={match.match_number} className="wc-item">
-                        <p className="wc-stage">{match.stage}</p>
-                        <p className="wc-line">
-                          <span>{match.home_team}</span>
-                          <strong>{match.played === 'yes' ? match.score : 'vs'}</strong>
-                          <span>{match.away_team}</span>
-                        </p>
-                        <p className="wc-date">{match.date}</p>
-                        <p className="prediction">Prediction: {match.prediction.text}</p>
-                        {match.prediction.confidence ? (
-                          <p className="confidence">Confidence: {match.prediction.confidence}%</p>
-                        ) : null}
-                      </article>
-                    ))}
-                  </div>
-
-                  <p className="wc-note">
-                    Showing first 16 matches. Full data available in
-                    {' '}
-                    <code>world_cup_2026_scores.json</code>.
-                  </p>
-                </div>
-              )}
-            </section>
-          </section>
-        )}
-
-        {/* Stats Tab */}
-        {viewTab === 'stats' && (
-          <section className="tab-content">
-            <section className="stats-panel">
-              <button
-                type="button"
-                className="collapsible-header"
-                onClick={() => toggleSection('playerStats')}
-              >
-                <span className="collapsible-title">Player Statistics & Team Insights</span>
-                <span className="collapsible-icon">{expandedSections.playerStats ? '▼' : '▶'}</span>
-              </button>
-
-              {expandedSections.playerStats && (
-                <div className="collapsible-content">
-                  <div className="stats-grid">
-                    <article className="stat-card">
-                      <h3>Live Matches</h3>
-                      <p className="stat-number">{liveNowCount}</p>
-                      <p className="stat-label">Currently playing</p>
-                    </article>
-                    <article className="stat-card">
-                      <h3>Upcoming</h3>
-                      <p className="stat-number">{scheduledCount}</p>
-                      <p className="stat-label">Matches scheduled</p>
-                    </article>
-                    <article className="stat-card">
-                      <h3>Completed</h3>
-                      <p className="stat-number">{finalCount}</p>
-                      <p className="stat-label">Matches finished</p>
-                    </article>
-                    <article className="stat-card">
-                      <h3>Your Watchlist</h3>
-                      <p className="stat-number">{watchlistMatches.length}</p>
-                      <p className="stat-label">Saved matches</p>
-                    </article>
-                  </div>
-                </div>
-              )}
-            </section>
-
-            <section className="watchlist-panel">
-              <div className="section-head">
-                <h2>Your Watchlist</h2>
-                <span>{watchlistMatches.length} saved matches</span>
+              <div className="watch-links">
+                {(match.momentsLinks || []).map((link) => (
+                  <a
+                    key={`${match.id}-${link.url}`}
+                    href={link.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={(event) => event.stopPropagation()}
+                  >
+                    {link.label}
+                  </a>
+                ))}
+                {(match.watchLinks || []).map((link) => (
+                  <a
+                    key={link.url}
+                    href={link.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    onClick={(event) => event.stopPropagation()}
+                  >
+                    {link.label}
+                  </a>
+                ))}
               </div>
+            </article>
+          ))}
 
-              {watchlistMatches.length === 0 ? (
-                <p className="state-message">Star matches to keep them pinned here.</p>
-              ) : (
-                <div className="watchlist-grid">
-                  {watchlistMatches.map((match) => (
-                    <article key={match.id} className="watchlist-card">
-                      <div className="meta">
-                        <span className="league">{match.league}</span>
-                        <span className="status">{match.status}</span>
-                      </div>
-                      <p className="watchlist-title">
-                        {match.homeTeam} vs {match.awayTeam}
-                      </p>
-                      <p className="confidence">
-                        {match.prediction.confidence
-                          ? `${match.prediction.confidence}% confidence`
-                          : 'Prediction locked'}
-                      </p>
-                    </article>
-                  ))}
-                </div>
-              )}
-            </section>
-          </section>
-        )}
-      </div>
+          {!isLoadingLive && visibleMatches.length === 0 ? (
+            <p className="state-message">No games found in this feed right now.</p>
+          ) : null}
+        </div>
+      </section>
+
+      <section className="world-cup-panel">
+        <div className="section-head">
+          <h2>FIFA World Cup 2026</h2>
+          <span>
+            {playedCount}/{worldCupMatches.length} played
+          </span>
+        </div>
+
+        <div className="wc-list">
+          {predictedWorldCupMatches.map((match) => (
+            <article key={match.match_number} className="wc-item">
+              <p className="wc-stage">{match.stage}</p>
+              <p className="wc-line">
+                <span>{match.home_team}</span>
+                <strong>{match.played === 'yes' ? match.score : 'vs'}</strong>
+                <span>{match.away_team}</span>
+              </p>
+              <p className="wc-date">{match.date}</p>
+              <p className="prediction">Prediction: {match.prediction.text}</p>
+              {match.prediction.confidence ? (
+                <p className="confidence">Confidence: {match.prediction.confidence}%</p>
+              ) : null}
+            </article>
+          ))}
+        </div>
+
+        <p className="wc-note">
+          Showing first 16 matches. Full data is available in
+          {' '}
+          <code>world_cup_2026_scores.json</code>.
+        </p>
+      </section>
 
       {selectedMatch ? (
         <section className="details-modal" aria-label="Match details">
